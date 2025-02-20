@@ -9,10 +9,12 @@
 
 ## Purpose of project 
 
-* Learning Kotlin, and how to use Websockets with Spring Boot, and Frontend
-* Fun of HTMX, heard a lot of that technology never done anything so that's worth of try
+* Learn Kotlin, and Spring Boot.
+* Learn how to use Websocket with Spring Boot, and Frontend
+* Fun of HTMX, heard a lot of that technology never done anything so that's worth of try in that project
 
 ## Goals of project
- | Day | Goal                                                          | Is Implemented           |
+ | Day | Goal                                                          | Implemented              |
  |-----|---------------------------------------------------------------|--------------------------|
 | 1   | Create chat application that allows many users to communicate | <ul><li>- [x] </li></ul> |
+| 2   | Create history of chat that will be loaded for new user       | <ul><li>- [ ] </li></ul> |
