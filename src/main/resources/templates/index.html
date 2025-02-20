@@ -38,7 +38,7 @@
 
     document.getElementById("username_form").addEventListener("submit", (event) => {
         event.preventDefault();
-        username = document.getElementById("username_input").value.trim();
+        username = document.getElementById("username_input").value.trim()+'#'+(Math.random()+1).toString(36).substring(7);
         if (username) {
             document.getElementById("username_selection").style.display = "none";
             document.getElementById("chat").style.display = "block";
