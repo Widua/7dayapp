@@ -1,0 +1,57 @@
+body{
+    background-color: Canvas;
+    color: CanvasText;
+    color-scheme: light dark;
+
+}
+.center {
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+.button {
+    background-color: #04AA6D;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
+.flex_form{
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.input{
+    padding: 14px;
+}
+#chat_room{
+    position: absolute;
+    top: 0;
+    left: 10%;
+    width: 90%;
+    height: 40%;
+    overflow-y: scroll;
+    scrollbar-width: none;
+}
+#chat_room::-webkit-scrollbar{
+    display: none;
+}
+.whole_message{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    gap: 1%;
+}
+#chat_message_input{
+    width: 80%;
+}
+.time_part{
+    opacity: 30%;
+}

@@ -1,0 +1,102 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chat WebSocket</title>
+    <script src="https://unpkg.com/htmx.org@1.9.12" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+</head>
+<body>
+
+<div class="center" id="username_selection">
+
+    <form class="flex_form" id="username_form">
+        <label for="username_input">Enter username: </label>
+        <div>
+            <input class="input" id="username_input" name="username" required>
+            <button class="button" type="submit">Connect</button>
+        </div>
+    </form>
+</div>
+
+<section id="chat" hx-ext="ws" ws-connect="/chat" style="display: none">
+    <div class="notification" id="notifications"></div>
+
+    <div id="chat_room"></div>
+
+    <form class="flex_form center" id="form" ws-send="json">
+        <label for="chat_message_input">Enter message</label>
+        <div>
+            <input class="input" id="chat_message_input" name="chat_message">
+            <button class="button" type="submit">Send</button>
+        </div>
+
+    </form>
+</section>
+
+<script>
+    let username = "";
+
+    document.getElementById("username_form").addEventListener("submit", (event) => {
+        event.preventDefault();
+        username = document.getElementById("username_input").value.trim();
+        if (username) {
+            document.getElementById("username_selection").style.display = "none";
+            document.getElementById("chat").style.display = "block";
+        }
+    });
+
+    document.addEventListener("htmx:wsConfigSend", (event) => {
+        let messageInput = document.getElementById("chat_message_input");
+        let message = messageInput.value.trim();
+
+        if (message && username) {
+            event.detail.parameters = {
+                username: username,
+                message: message
+            };
+            messageInput.value = "";
+        }
+    });
+
+    document.addEventListener("htmx:wsAfterMessage", (event) => {
+        let message = JSON.parse(event.detail.message);
+        if (message.username && message.message && message.time) {
+            let chatRoom = document.getElementById("chat_room");
+            let timeElement = createPAndAddTextContent("time_part",message.time)
+            let usernameElement = createPAndAddTextContent("username_part",message.username);
+
+            if (username === message.username){
+                usernameElement.style.color = "#04AA6D"
+            } else {
+                usernameElement.style.color = "#049caa"
+            }
+
+
+            let messageElement = createPAndAddTextContent("message_part",`${message.message}`)
+
+            let wholeMessage = document.createElement("p")
+            wholeMessage.className = "whole_message"
+            wholeMessage.appendChild(timeElement);
+            wholeMessage.appendChild(usernameElement);
+            wholeMessage.appendChild(messageElement);
+            chatRoom.appendChild(wholeMessage);
+            chatRoom.scrollTop = chatRoom.scrollHeight;
+
+            // let notifications = document.getElementById("notifications");
+            // let notificationElement = document.createElement("p");
+            // notificationElement.textContent = `New message from ${message.username}`;
+            // notifications.appendChild(notificationElement);
+        }
+    });
+
+
+    function createPAndAddTextContent(name,content){
+        let element = document.createElement('p')
+        element.textContent = content;
+        element.className = name;
+        return element;
+    }
+</script>
+
+</body>
+</html>
