@@ -1,5 +1,6 @@
 package dev.widua.chatapp.chat
 
+import dev.widua.chatapp.chat_history.MessageHistoryService
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.springframework.stereotype.Component
@@ -11,8 +12,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @Component
-class WebsocketHandler : TextWebSocketHandler() {
+class WebsocketHandler(val messageHistoryService: MessageHistoryService) : TextWebSocketHandler() {
     private val sessions = mutableListOf<WebSocketSession>()
+
 
     override fun afterConnectionEstablished(session: WebSocketSession) {
         println("Connection established: " + session.remoteAddress)
@@ -30,7 +32,7 @@ class WebsocketHandler : TextWebSocketHandler() {
         val outputMessage = OutputMessage( messageObject.username, messageObject.message, SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(
             Date()
         ) )
-
+        messageHistoryService.saveMessage(outputMessage)
         for (session in sessions){
             session.sendMessage(TextMessage( Json.encodeToString(outputMessage) ))
         }

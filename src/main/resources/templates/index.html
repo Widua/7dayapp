@@ -13,7 +13,7 @@
         <label for="username_input">Enter username: </label>
         <div>
             <input class="input" id="username_input" name="username" required>
-            <button class="button" type="submit">Connect</button>
+            <button id="connect_button" class="button" type="submit">Connect</button>
         </div>
     </form>
 </div>
@@ -40,10 +40,41 @@
         event.preventDefault();
         username = document.getElementById("username_input").value.trim()+'#'+(Math.random()+1).toString(36).substring(7);
         if (username) {
+            fetch( 'history/getMessages' , {
+                method: 'GET'
+            } )
+                .then( (response) => response.json())
+                .then((json)=> loadChatHistory(json) )
             document.getElementById("username_selection").style.display = "none";
             document.getElementById("chat").style.display = "block";
         }
     });
+
+    function loadChatHistory(json){
+        json.forEach(
+            (message) => {
+                let wholeMessage = document.createElement('p');
+
+                wholeMessage.className = 'whole_message'
+
+                let timeElement = createPAndAddTextContent("time_part",message.time)
+                let usernameElement = createPAndAddTextContent("username_part",message.username);
+                let messageElement = createPAndAddTextContent("message_part",`${message.message}`);
+
+                if (username === message.username){
+                    usernameElement.style.color = "#04AA6D"
+                } else {
+                    usernameElement.style.color = "#049caa"
+                }
+
+                wholeMessage.appendChild(timeElement)
+                wholeMessage.appendChild(usernameElement)
+                wholeMessage.appendChild(messageElement)
+
+                document.getElementById('chat_room').appendChild(wholeMessage)
+            }
+        )
+    }
 
     document.addEventListener("htmx:wsConfigSend", (event) => {
         let messageInput = document.getElementById("chat_message_input");
@@ -70,7 +101,6 @@
             } else {
                 usernameElement.style.color = "#049caa"
             }
-
 
             let messageElement = createPAndAddTextContent("message_part",`${message.message}`)
 
