@@ -19,4 +19,4 @@
  |-----|---------------------------------------------------------------|--------------------------|
 | 1   | Create chat application that allows many users to communicate | <ul><li>- [x] </li></ul> |
 | 2   | Create history of chat that will be loaded for new user       | <ul><li>- [x] </li></ul> |
-| 3   | Create possibility of creating chat rooms                     | <ul><li>- [] </li></ul>  |
+| 3   | Create possibility of creating chat rooms                     | <ul><li>- [ ] </li></ul> |
