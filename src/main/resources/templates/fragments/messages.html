@@ -1,0 +1,8 @@
+<th:block th:each="message : ${messages}">
+    <div class="whole_message">
+        <p class="time_part" th:text="${message.time}"></p>
+        <p class="username_part" style="color: rgb(4, 170, 109);" th:if="${message.username == username}" th:text="${message.username}"></p>
+        <p class="username_part" style="color: rgb(4 156 170);" th:unless="${message.username == username}" th:text="${message.username}"></p>
+        <p class="message_part" th:text="${message.message}"></p>
+    </div>
+</th:block>

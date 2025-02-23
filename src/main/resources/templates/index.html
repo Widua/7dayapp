@@ -21,7 +21,7 @@
 <section id="chat" hx-ext="ws" ws-connect="/chat" style="display: none">
     <div class="notification" id="notifications"></div>
 
-    <div id="chat_room"></div>
+    <div hx-get="/history/getMessages" hx-trigger="load" id="chat_room" hx-swap="innerHTML" hx-vals="js:{username: username}"></div>
 
     <form class="flex_form center" id="form" ws-send="json">
         <label for="chat_message_input">Enter message</label>
@@ -40,41 +40,10 @@
         event.preventDefault();
         username = document.getElementById("username_input").value.trim()+'#'+(Math.random()+1).toString(36).substring(7);
         if (username) {
-            fetch( 'history/getMessages' , {
-                method: 'GET'
-            } )
-                .then( (response) => response.json())
-                .then((json)=> loadChatHistory(json) )
             document.getElementById("username_selection").style.display = "none";
             document.getElementById("chat").style.display = "block";
         }
     });
-
-    function loadChatHistory(json){
-        json.forEach(
-            (message) => {
-                let wholeMessage = document.createElement('p');
-
-                wholeMessage.className = 'whole_message'
-
-                let timeElement = createPAndAddTextContent("time_part",message.time)
-                let usernameElement = createPAndAddTextContent("username_part",message.username);
-                let messageElement = createPAndAddTextContent("message_part",`${message.message}`);
-
-                if (username === message.username){
-                    usernameElement.style.color = "#04AA6D"
-                } else {
-                    usernameElement.style.color = "#049caa"
-                }
-
-                wholeMessage.appendChild(timeElement)
-                wholeMessage.appendChild(usernameElement)
-                wholeMessage.appendChild(messageElement)
-
-                document.getElementById('chat_room').appendChild(wholeMessage)
-            }
-        )
-    }
 
     document.addEventListener("htmx:wsConfigSend", (event) => {
         let messageInput = document.getElementById("chat_message_input");
