@@ -1,6 +1,6 @@
 package dev.widua.chatapp.chat
 
-import dev.widua.chatapp.chat_history.MessageHistoryService
+import dev.widua.chatapp.message_history.MessageHistoryService
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.springframework.stereotype.Component

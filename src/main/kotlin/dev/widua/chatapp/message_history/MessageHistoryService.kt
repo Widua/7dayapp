@@ -1,4 +1,4 @@
-package dev.widua.chatapp.chat_history
+package dev.widua.chatapp.message_history
 
 import dev.widua.chatapp.chat.OutputMessage
 

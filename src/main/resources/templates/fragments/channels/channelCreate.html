@@ -1,0 +1,15 @@
+<dialog id="new_channel_dialog" open>
+  <p>CREATE NEW CHANNEL</p>
+  <form>
+
+    <label for="newChannelName">Name of channel</label><input name="name" id="newChannelName">
+    <button hx-post="/channel/create" hx-swap="innerHTML" hx-trigger="click" hx-target="#channel_select_div" hx-vals="js:{channelName: getChannelName()}">Create</button>
+
+  </form>
+</dialog>
+
+<script>
+  function getChannelName(){
+    return document.getElementById("newChannelName").value.trim();
+  }
+</script>

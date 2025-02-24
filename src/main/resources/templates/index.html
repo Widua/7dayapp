@@ -4,18 +4,12 @@
     <script src="https://unpkg.com/htmx.org@1.9.12" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/ws.js"></script>
     <link th:href="@{/styles/style.css}" rel="stylesheet" />
+    <link th:href="@{/styles/channels.css}" rel="stylesheet" />
 </head>
 <body>
 
-<div class="center" id="username_selection">
+<div class="center" hx-get="/connect" hx-trigger="load once" hx-swap="innerHTML" id="username_selection">
 
-    <form class="flex_form" id="username_form">
-        <label for="username_input">Enter username: </label>
-        <div>
-            <input class="input" id="username_input" name="username" required>
-            <button id="connect_button" class="button" type="submit">Connect</button>
-        </div>
-    </form>
 </div>
 
 <section id="chat" hx-ext="ws" ws-connect="/chat" style="display: none">
@@ -35,15 +29,6 @@
 
 <script>
     let username = "";
-
-    document.getElementById("username_form").addEventListener("submit", (event) => {
-        event.preventDefault();
-        username = document.getElementById("username_input").value.trim()+'#'+(Math.random()+1).toString(36).substring(7);
-        if (username) {
-            document.getElementById("username_selection").style.display = "none";
-            document.getElementById("chat").style.display = "block";
-        }
-    });
 
     document.addEventListener("htmx:wsConfigSend", (event) => {
         let messageInput = document.getElementById("chat_message_input");

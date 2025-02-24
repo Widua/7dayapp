@@ -1,0 +1,12 @@
+#create_channel_button{
+    padding: 2px;
+}
+
+#channel_select_div{
+    margin-top: 5px;
+}
+
+#new_channel_dialog{
+    width: 50%;
+    padding: 10px;
+}

@@ -1,0 +1,9 @@
+
+<div id="channel_select_div">
+  <label for="channel_selection">Select Channel: </label>
+  <select name="channel_selection" id="channel_selection">
+    <option th:each="channel:${channels}" th:value="${channel.id}" th:text="${channel.name}">
+    </option>
+  </select>
+  <button hx-trigger="click" hx-get="/channel/create" hx-swap="innerHTML" hx-target="#channel_select_div" id="create_channel_button">Create new channel</button>
+</div>

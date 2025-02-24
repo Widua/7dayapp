@@ -1,6 +1,6 @@
 package dev.widua.chatapp.controller
 
-import dev.widua.chatapp.chat_history.MessageHistoryService
+import dev.widua.chatapp.message_history.MessageHistoryService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
