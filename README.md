@@ -15,8 +15,8 @@
 * Fun of HTMX, heard a lot of that technology never done anything so that's worth of try in that project
 
 ## Goals of project
- | Day | Goal                                                          | Implemented              |
- |-----|---------------------------------------------------------------|--------------------------|
-| 1   | Create chat application that allows many users to communicate | <ul><li>- [x] </li></ul> |
-| 2   | Create history of chat that will be loaded for new user       | <ul><li>- [x] </li></ul> |
-| 3   | Adjust page to be able to handle multiple channels            | <ul><li>- [ ] </li></ul> |
+ | Step | Goal                                                          | Implemented              |
+ |------|---------------------------------------------------------------|--------------------------|
+| 1    | Create chat application that allows many users to communicate | <ul><li>- [x] </li></ul> |
+| 2    | Create history of chat that will be loaded for new user       | <ul><li>- [x] </li></ul> |
+| 3    | Adjust page to be able to handle multiple channels            | <ul><li>- [ ] </li></ul> |
